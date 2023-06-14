@@ -1,0 +1,17 @@
+
+    //remove records 输入source,destination 根据source,destination匹配
+    function remove(string memory source, string memory destination) 
+    public 
+    permissionedUser
+    returns (int256) {
+        Table table = tableFactory.openTable(TABLE_NAME);
+
+        Condition condition = table.newCondition();
+        condition.EQ("source",source);
+        condition.EQ("destination",destination);
+
+        int256 count = table.remove(source, condition);
+        emit RemoveResult(count);
+
+        return count;
+    
